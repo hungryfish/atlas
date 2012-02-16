@@ -1,0 +1,1 @@
+puts "=> Loading Atlas gem version #{Atlas::VERSION}"

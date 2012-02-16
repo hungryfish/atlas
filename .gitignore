@@ -1,0 +1,5 @@
+pkg/
+*.tmproj
+.DS_Store
+*.gem
+*.gemspec

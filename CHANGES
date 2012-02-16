@@ -1,0 +1,40 @@
+== Changes Made from PublicEarth Web Site (www project)
+
+* Added Category.to_json method
+* Fixed bug with renaming the Rails Inflector to ActiveSupport::Inflector (base.rb line 107):
+
+  def schema_name
+    self.name =~ /::([^:]*)$/ && $1 && ActiveSupport::Inflector.underscore($1) || nil
+  end
+
+* Connections are pooled now in Rails, so removed the saving of the connection with the PublicEarth::Db::Base class:
+
+  def connection
+    ActiveRecord::Base.connection
+  end
+
+* Removed PublicEarth::Db::Base.connection= method, as connections are pooled.
+
+* Created a PublicEarth::Db::Developer class (SQL scripts are in the www project).
+
+* Added plist functionality (initializer, base.rb, category.rb)
+
+* Added to_cache method to PublicEarth::Db::Category (later replaced by "ontology")
+
+* Took category "head" out of the place JSON.  Moved data formats to their own extension file.
+
+* Changed "tags" to "keywords" in the place JSON and XML output.
+
+* Added to_xml, to_json, and to_plist to details.
+
+* Read-only place details.
+
+* Load place from search document results.
+
+* Cache categories, attribute definitions by name in memcached.
+
+* Added wiki_as_html, wiki_as_text, and apply_formatting to Details, so clients may indicate the formatting to return for place details.  Created a RedCloth formatter to strip wiki tags and return pure text.
+
+* Passing Details reference to each attribute, so it can refer back to its details.  For formatting, but useful across the board in a variety of situations.
+
+* Category ontology method.
